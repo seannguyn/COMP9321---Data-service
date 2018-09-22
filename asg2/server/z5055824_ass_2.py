@@ -56,7 +56,7 @@ class IndicatorsList(Resource):
         data = json.loads(r.content.decode('ascii'))
 
         if (len(data)==1):
-            return data[0], 400
+            return data[0], 404
         else:
             entries = []
             collection = {}
@@ -107,7 +107,7 @@ class Indicators(Resource):
 
             return {
                 "message" : "collection_id: "+ id +" does not exist",
-                }, 400
+                }, 404
         else:
             retDocument = {}
             retDocument['collection_id']    = document['id']
@@ -127,7 +127,7 @@ class Indicators(Resource):
 
             return {
                 "message" : "collection_id: "+ id +" does not exist",
-                }, 400
+                }, 404
         else:
             myQuery = { "id": id }
 
@@ -149,13 +149,13 @@ class IndicatorYearCountry(Resource):
 
             return {
                 "message" : "collection_id: "+ id +" does not exist",
-                }, 400
+                }, 404
 
         # check if year is valid
         if (year < 2012 or year > 2017):
             return {
                 "message" : "year need to br from 2012 to 2017",
-                }, 400
+                }, 404
 
         for x in document['entries']:
             if x['country'] == country:
@@ -169,7 +169,7 @@ class IndicatorYearCountry(Resource):
 
         return {
             "message" : "country: "+country+" is invalid",
-            }, 400
+            }, 404
 
 
 queryParser = api.parser()
@@ -194,13 +194,13 @@ class IndicatorYearCountrySort(Resource):
 
             return {
                 "message" : "collection_id: "+ id +" does not exist",
-                }, 400
+                }, 404
 
         # check if year is valid
         if (year < 2012 or year > 2017):
             return {
                 "message" : "year need to br from 2012 to 2017",
-                }, 400
+                }, 404
 
         entries = []
         for x in document['entries']:
